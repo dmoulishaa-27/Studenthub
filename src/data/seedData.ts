@@ -1,0 +1,325 @@
+import { StudentHubState, StudentProfile } from '../types';
+import { addDaysISO, getTodayISO } from '../utils/dateUtils';
+
+export const DEMO_ACCOUNT_EMAIL = 'maya.chen@university.edu';
+export const DEMO_ACCOUNT_PASSWORD = 'Student123!';
+
+export function createEmptyUserWorkspace(
+  profile: Partial<StudentProfile> & { name: string; email: string }
+): StudentHubState {
+  return {
+    profile: {
+      name: profile.name,
+      college: profile.college || 'State University of Technology',
+      major: profile.major || 'B.S. Computer Science',
+      year: profile.year || 'Current Semester',
+      email: profile.email,
+      avatar: profile.avatar || 'monogram:navy',
+    },
+    preferences: {
+      theme: 'light',
+      notifications: {
+        deadlineReminders: true,
+        dailySummary: true,
+        focusBell: true,
+        overdueAlerts: true,
+      },
+    },
+    readNotificationIds: [],
+    tasks: [],
+    studySessions: [],
+    focusLogs: [],
+  };
+}
+
+export function createSeedState(
+  profileOverrides?: Partial<StudentProfile>
+): StudentHubState {
+  const today = getTodayISO();
+
+  return {
+    profile: {
+      name: profileOverrides?.name || 'Maya Chen',
+      college: profileOverrides?.college || 'Pacific Institute of Technology',
+      major: profileOverrides?.major || 'B.S. Computer Science',
+      year: profileOverrides?.year || 'Junior · Semester 5',
+      email: profileOverrides?.email || DEMO_ACCOUNT_EMAIL,
+      avatar:
+        profileOverrides?.avatar ||
+        '/src/assets/images/avatar_student_1_1795183989616.jpg',
+    },
+    preferences: {
+      theme: 'light',
+      notifications: {
+        deadlineReminders: true,
+        dailySummary: true,
+        focusBell: true,
+        overdueAlerts: true,
+      },
+    },
+    readNotificationIds: [],
+    tasks: [
+      {
+        id: 'task-1',
+        title: 'Complete Java OOP Assignment',
+        description:
+          'Implement polymorphic shape hierarchy, interface contracts, and unit tests for Lab 6 submission.',
+        subject: 'Computer Science',
+        category: 'Assignments',
+        dueDate: today,
+        dueTime: '23:59',
+        priority: 'High',
+        status: 'In Progress',
+        createdAt: addDaysISO(today, -3),
+      },
+      {
+        id: 'task-2',
+        title: 'Prepare for Mathematics Examination',
+        description:
+          'Review eigenvalues, orthogonal projections, and solve the past 3 years of midterm question sets.',
+        subject: 'Linear Algebra',
+        category: 'Examinations',
+        dueDate: addDaysISO(today, 2),
+        dueTime: '09:30',
+        priority: 'High',
+        status: 'Pending',
+        createdAt: addDaysISO(today, -4),
+      },
+      {
+        id: 'task-3',
+        title: 'Build HTML and CSS Project',
+        description:
+          'Finish responsive portfolio grid, semantic landmarks, and accessibility audit for Web Systems Studio.',
+        subject: 'Web Development',
+        category: 'Projects',
+        dueDate: today,
+        dueTime: '20:00',
+        priority: 'Medium',
+        status: 'In Progress',
+        createdAt: addDaysISO(today, -5),
+      },
+      {
+        id: 'task-4',
+        title: 'Practice 5 DSA Problems',
+        description:
+          'Focus on binary tree traversals, sliding window optimization, and graph BFS shortest path patterns.',
+        subject: 'Data Structures',
+        category: 'Coding Practice',
+        dueDate: addDaysISO(today, 1),
+        dueTime: '18:00',
+        priority: 'Medium',
+        status: 'Pending',
+        createdAt: addDaysISO(today, -2),
+      },
+      {
+        id: 'task-5',
+        title: 'Revise AI Fundamentals',
+        description:
+          'Summarize A* search heuristics, alpha-beta pruning complexity, and Bayesian network inference notes.',
+        subject: 'Artificial Intelligence',
+        category: 'Study Sessions',
+        dueDate: addDaysISO(today, 4),
+        dueTime: '16:00',
+        priority: 'Low',
+        status: 'Pending',
+        createdAt: addDaysISO(today, -1),
+      },
+      {
+        id: 'task-6',
+        title: 'Complete Coding Practice',
+        description:
+          'Solve dynamic programming weekly sheet on knapsack variations and longest common subsequence.',
+        subject: 'Algorithms',
+        category: 'Coding Practice',
+        dueDate: addDaysISO(today, -1),
+        dueTime: '21:00',
+        priority: 'Medium',
+        status: 'Pending',
+        createdAt: addDaysISO(today, -6),
+      },
+      {
+        id: 'task-7',
+        title: 'Submit Database Normalization Lab',
+        description:
+          'Convert legacy ER schema into BCNF and document functional dependencies in PDF report.',
+        subject: 'Database Systems',
+        category: 'Assignments',
+        dueDate: addDaysISO(today, -2),
+        dueTime: '17:00',
+        priority: 'High',
+        status: 'Completed',
+        createdAt: addDaysISO(today, -7),
+        completedAt: addDaysISO(today, -2),
+      },
+      {
+        id: 'task-8',
+        title: 'Organize Semester Study Notes',
+        description:
+          'Archive completed lecture slides and prepare revision checklist folders for finals week.',
+        subject: 'Personal',
+        category: 'Personal Tasks',
+        dueDate: addDaysISO(today, -1),
+        dueTime: '14:00',
+        priority: 'Low',
+        status: 'Completed',
+        createdAt: addDaysISO(today, -5),
+        completedAt: addDaysISO(today, -1),
+      },
+      {
+        id: 'task-9',
+        title: 'Operating Systems Process Scheduling Quiz',
+        description:
+          'Completed round-robin vs shortest-remaining-time-first calculation drills and graded quiz.',
+        subject: 'Operating Systems',
+        category: 'Examinations',
+        dueDate: addDaysISO(today, -3),
+        dueTime: '11:00',
+        priority: 'Medium',
+        status: 'Completed',
+        createdAt: addDaysISO(today, -8),
+        completedAt: addDaysISO(today, -3),
+      },
+      {
+        id: 'task-10',
+        title: 'Computer Networks Subnetting Worksheet',
+        description: 'Completed CIDR allocation tables and routing verification exercises.',
+        subject: 'Computer Science',
+        category: 'Assignments',
+        dueDate: addDaysISO(today, -10),
+        dueTime: '18:00',
+        priority: 'Medium',
+        status: 'Completed',
+        createdAt: addDaysISO(today, -14),
+        completedAt: addDaysISO(today, -10),
+      },
+      {
+        id: 'task-11',
+        title: 'Linear Algebra Matrix Decomposition Quiz',
+        description: 'Completed LU and QR factorization practice exam.',
+        subject: 'Linear Algebra',
+        category: 'Examinations',
+        dueDate: addDaysISO(today, -16),
+        dueTime: '10:00',
+        priority: 'High',
+        status: 'Completed',
+        createdAt: addDaysISO(today, -20),
+        completedAt: addDaysISO(today, -16),
+      },
+    ],
+    studySessions: [
+      {
+        id: 'study-1',
+        title: 'Java OOP Inheritance & Design Patterns',
+        subject: 'Computer Science',
+        date: today,
+        startTime: '09:00',
+        endTime: '10:30',
+        completed: true,
+        notes: 'Finished abstract factory and strategy pattern examples.',
+      },
+      {
+        id: 'study-2',
+        title: 'Linear Algebra Eigenvalue Problem Set',
+        subject: 'Linear Algebra',
+        date: today,
+        startTime: '11:00',
+        endTime: '12:30',
+        completed: false,
+        notes: 'Work through chapters 5.1–5.3 proofs.',
+      },
+      {
+        id: 'study-3',
+        title: 'Responsive CSS Grid & Accessibility Review',
+        subject: 'Web Development',
+        date: today,
+        startTime: '14:30',
+        endTime: '16:00',
+        completed: false,
+        notes: 'Audit keyboard focus order and color contrast.',
+      },
+      {
+        id: 'study-4',
+        title: 'DSA Graph Traversal Timed Drills',
+        subject: 'Data Structures',
+        date: today,
+        startTime: '17:30',
+        endTime: '19:00',
+        completed: false,
+        notes: 'Target 3 medium BFS/DFS problems under 75 minutes.',
+      },
+      {
+        id: 'study-5',
+        title: 'Mock Mathematics Midterm Practice',
+        subject: 'Linear Algebra',
+        date: addDaysISO(today, 1),
+        startTime: '10:00',
+        endTime: '12:00',
+        completed: false,
+        notes: 'Timed 120-minute exam simulation.',
+      },
+      {
+        id: 'study-6',
+        title: 'Database BCNF Proof Practice',
+        subject: 'Database Systems',
+        date: addDaysISO(today, -9),
+        startTime: '14:00',
+        endTime: '16:00',
+        completed: true,
+        notes: 'Reviewed canonical cover and lossless join decomposition.',
+      },
+      {
+        id: 'study-7',
+        title: 'Matrix Factorization Deep Dive',
+        subject: 'Linear Algebra',
+        date: addDaysISO(today, -16),
+        startTime: '13:00',
+        endTime: '15:30',
+        completed: true,
+        notes: 'Prepared for quiz on orthogonal matrices.',
+      },
+    ],
+    focusLogs: [
+      {
+        id: 'focus-1',
+        date: addDaysISO(today, -4),
+        completedAt: `${addDaysISO(today, -4)}T10:25:00`,
+        durationMinutes: 25,
+        mode: 'focus',
+        taskTitle: 'Operating Systems Process Scheduling Quiz',
+      },
+      {
+        id: 'focus-2',
+        date: addDaysISO(today, -3),
+        completedAt: `${addDaysISO(today, -3)}T14:40:00`,
+        durationMinutes: 25,
+        mode: 'focus',
+        taskTitle: 'Submit Database Normalization Lab',
+      },
+      {
+        id: 'focus-3',
+        date: addDaysISO(today, -2),
+        completedAt: `${addDaysISO(today, -2)}T16:15:00`,
+        durationMinutes: 25,
+        mode: 'focus',
+        taskTitle: 'Submit Database Normalization Lab',
+      },
+      {
+        id: 'focus-4',
+        date: addDaysISO(today, -1),
+        completedAt: `${addDaysISO(today, -1)}T11:30:00`,
+        durationMinutes: 25,
+        mode: 'focus',
+        taskTitle: 'Build HTML and CSS Project',
+      },
+      {
+        id: 'focus-5',
+        date: today,
+        completedAt: `${today}T09:50:00`,
+        durationMinutes: 25,
+        mode: 'focus',
+        taskId: 'task-1',
+        taskTitle: 'Complete Java OOP Assignment',
+      },
+    ],
+  };
+}

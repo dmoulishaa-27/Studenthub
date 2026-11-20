@@ -1,0 +1,6 @@
+{
+  "name": "StudentHub",
+  "description": "Plan Smarter. Study Better. Achieve More. A modern student productivity workspace for assignments, examinations, study schedules, and focused work.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
